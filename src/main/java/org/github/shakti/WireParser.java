@@ -16,7 +16,7 @@ import java.util.List;
 
 public class WireParser {
     public static void main(String[] args) {
-        ProtobufSchema parsedSchema = (ProtobufSchema) parseProtobufSchema(new File("src/main/resources/playground/v1/quote_sample_1.proto"),
+        ProtobufSchema parsedSchema = (ProtobufSchema) parseProtobufSchema(new File("src/main/resources/playground/v1/quote_sample.proto"),
                 Collections.emptyList());
         System.out.println("=====Canonical Schema======");
         System.out.println(parsedSchema.canonicalString());
