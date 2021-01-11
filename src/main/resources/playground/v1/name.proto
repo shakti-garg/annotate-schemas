@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package playground.v1;
+
+message Name {
+[(biz_term_name) = "topic biz term", (biz_term_def) = "xyz", (biz_term_source) = "FIBO", (biz_term_source_uri) = "https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/MonetaryAmount"];
+
+  string first_name = 1;
+  string last_name = 2;
+}

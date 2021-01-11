@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package playground.v1;
+
+import "src/main/resources/playground/v1/name.proto";
+
+import "google/protobuf/descriptor.proto";
+
+message BusinessTermOptions {
+  optional string name = 1;
+  optional string def = 2;
+  optional string source_name = 3;
+  optional string source_uri = 4;
+}
+
+
+extend google.protobuf.MessageOptions {
+  optional BusinessTermOptions biz_term = 51234;
+}
+
+extend google.protobuf.FieldOptions {
+  optional BusinessTermOptions biz_term = 51234;
+}
+
+option csharp_namespace = "Iit.DataHub.Common.v1.Protobuf";
+
+/*
+Quote Sample Documentation
+*/
+message QuoteSample {
+
+  option (biz_term) = {name: "sample_quote" def: "lqdjkwdkwdhkhwdh" source_name: "FIBO" source_uri: "https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/MonetaryAmount"};
+
+  //topic field documentation
+  int32 topic = 1[(biz_term) = { name: "topic biz term" def: "xyz" source_name: "FIBO" source_uri: "https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/MonetaryAmount"}];
+
+  //name field documentation
+  playground.v1.Name name = 2;
+}
