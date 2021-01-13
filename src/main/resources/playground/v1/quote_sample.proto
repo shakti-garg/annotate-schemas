@@ -4,31 +4,12 @@ package playground.v1;
 
 import "src/main/resources/playground/v1/name.proto";
 
-import "google/protobuf/descriptor.proto";
-
-message BusinessTermOptions {
-  optional string def = 2;
-  optional string source_name = 3;
-  optional string source_uri = 4;
-}
-
-
-extend google.protobuf.MessageOptions {
-  optional BusinessTermOptions biz_term = 51234;
-}
-
-extend google.protobuf.FieldOptions {
-  optional BusinessTermOptions biz_term = 51234;
-}
-
 option csharp_namespace = "Iit.DataHub.Common.v1.Protobuf";
 
 /*
 Quote Sample Documentation
 */
 message QuoteSample {
-
-  option (biz_term) = {def: "lqdjkwdkwdhkhwdh" source_name: "FIBO" source_uri: "https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/MonetaryAmount"};
 
   //topic field documentation
   int32 topic = 1;

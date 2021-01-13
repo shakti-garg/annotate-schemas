@@ -2,8 +2,10 @@ syntax = "proto3";
 
 package playground.v1;
 
+import "src/main/resources/playground/v1/business_term_descriptor.proto";
+
 message Name {
-  option (biz_term) = {def: "lqdjkwdkwdhkhwdh" source_name: "FIBO" source_uri: "https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/MonetaryAmount"};
+  option (biz_term) = {def: "Name definition" source_name: "FIBO" source_uri: "https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/Name"};
 
   string first_name = 1;
   string last_name = 2;
