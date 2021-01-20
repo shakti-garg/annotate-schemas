@@ -18,7 +18,7 @@ public class WireParser {
     final ProtoFileElement protoFileElement = ProtoParser.Companion
         .parse(Location.get(BASE_LOCATION, "src/main/resources"), schemaString);
 
-    System.out.println("=====Canonical Schema======");
+    System.out.println("=====Top-level Schema======");
     System.out.println(protoFileElement.toSchema());
 
     for (OptionElement optionElement : protoFileElement.getOptions()) {
