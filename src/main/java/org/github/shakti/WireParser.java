@@ -16,7 +16,7 @@ public class WireParser {
 
     final String schemaString = new String(Files.readAllBytes(schemaFile.toPath()));
     final ProtoFileElement protoFileElement = ProtoParser.Companion
-        .parse(Location.get(BASE_LOCATION, "src/main/resources/playground/v1"), schemaString);
+        .parse(Location.get(BASE_LOCATION, "src/main/resources"), schemaString);
 
     System.out.println("=====Canonical Schema======");
     System.out.println(protoFileElement.toSchema());
