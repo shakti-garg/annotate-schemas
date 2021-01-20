@@ -1,7 +1,7 @@
 package org.github.shakti;
 
 import com.google.protobuf.*;
-import playground.v1.BusinessTermDescriptor;
+import playground.v1.BusinessTermOptionsOuterClass;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -14,7 +14,7 @@ public class DescriptorFileParser {
     public static void main(String[] args) throws IOException, Descriptors.DescriptorValidationException {
 
         ExtensionRegistry extensionRegistry = ExtensionRegistry.newInstance();
-        extensionRegistry.add(BusinessTermDescriptor.bizTerm);
+        extensionRegistry.add(BusinessTermOptionsOuterClass.bizTerm);
 
         FileInputStream fin = new FileInputStream("src/main/resources/message_sample.desc");
         DescriptorProtos.FileDescriptorSet set = DescriptorProtos.FileDescriptorSet.parseFrom(fin, extensionRegistry);

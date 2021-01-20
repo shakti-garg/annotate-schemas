@@ -22,7 +22,7 @@ Use protobuf API's FileDescriptorSet to parse protobuf file and its dependencies
 ### Instructions
 1) Generate java bindings for proto file with definition of custom options
     ```
-    protoc --java_out=src/main/java  --experimental_allow_proto3_optional src/main/resources/playground/v1/business_term_descriptor.proto
+    protoc --java_out=src/main/java  --experimental_allow_proto3_optional src/main/resources/playground/v1/business_term_options.proto
     ```
 
 2) Compile protobuf files to generate a compiled binary descriptor file(contains a FileDescriptorSet (a protocol buffer, 
