@@ -2,14 +2,14 @@ syntax = "proto3";
 
 package playground.v1;
 
-import "src/main/resources/playground/v1/name.proto";
+import "playground/v1/name.proto";
 
-option csharp_namespace = "Iit.DataHub.Common.v1.Protobuf";
+option csharp_namespace = "org.v1.Protobuf";
 
 /*
-Quote Sample Documentation
+ Sample Documentation
 */
-message QuoteSample {
+message MessageSample {
 
   //topic field documentation
   int32 topic = 1;

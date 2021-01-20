@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package playground.v1;
 
-import "src/main/resources/playground/v1/name.proto";
+import "playground/v1/name.proto";
 
 import "google/protobuf/descriptor.proto";
 
@@ -21,12 +21,12 @@ extend google.protobuf.FieldOptions {
   optional BusinessTermOptions biz_term = 51234;
 }
 
-option csharp_namespace = "Iit.DataHub.Common.v1.Protobuf";
+option csharp_namespace = "org.v1.Protobuf";
 
 /*
-Quote Sample Documentation
+Sample Documentation
 */
-message QuoteSample {
+message MessageSample {
 
   option (biz_term).def = "lqdjkwdkwdhkhwdh";
   option (biz_term).source_name = "FIBO";

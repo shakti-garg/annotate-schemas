@@ -1,3 +1,5 @@
+syntax = "proto3";
+
 import "google/protobuf/descriptor.proto";
 
 message BusinessTermOptions {
@@ -8,9 +10,5 @@ message BusinessTermOptions {
 
 
 extend google.protobuf.MessageOptions {
-  optional BusinessTermOptions biz_term = 51234;
-}
-
-extend google.protobuf.FieldOptions {
   optional BusinessTermOptions biz_term = 51234;
 }
