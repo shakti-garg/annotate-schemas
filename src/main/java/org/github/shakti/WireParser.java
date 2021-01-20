@@ -8,15 +8,15 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 public class WireParser {
-  private static final String DEFAULT_LOCATION = "/Users/shaktig/Projects/saxo/workspace/annotate-schemas";
+  private static final String BASE_LOCATION = "./";
 
   public static void main(String[] args) throws IOException {
-    final String path = "src/main/resources/playground/v1/quote_sample.proto";
+    final String path = "src/main/resources/playground/v1/message_sample.proto";
     final File schemaFile = new File(path);
 
     final String schemaString = new String(Files.readAllBytes(schemaFile.toPath()));
     final ProtoFileElement protoFileElement = ProtoParser.Companion
-        .parse(Location.get(DEFAULT_LOCATION), schemaString);
+        .parse(Location.get(BASE_LOCATION, "src/main/resources/playground/v1"), schemaString);
 
     System.out.println("=====Canonical Schema======");
     System.out.println(protoFileElement.toSchema());
