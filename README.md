@@ -1,2 +1,42 @@
 # annotate-schemas
-This repo is a test repo on how to annotate binary schemas(in Avro, protobuf) with metadata at field level
+This is an experimental repo on 
+1) how to annotate binary schemas(protobuf) at field or message level
+2) how to parse protobuf schemas
+
+## Approach 1
+Parse proto source files directly using wire-schema API
+
+### Instructions
+1) Run WireParser.java
+
+### Positives
+1) Ability to directly parse the plain-text proto file
+2) Can extract comments also
+
+### Negatives
+1) Wire API's `ProtoParser` doesn't automatically load imported schemas 
+
+## Approach 2
+Use protobuf API's FileDescriptorSet to parse protobuf file and its dependencies
+
+### Instructions
+1) Generate java bindings for proto file with definition of custom options
+    ```
+    protoc --java_out=src/main/java  --experimental_allow_proto3_optional src/main/resources/playground/v1/business_term_descriptor.proto
+    ```
+
+2) Compile protobuf files to generate a compiled binary descriptor file(contains a FileDescriptorSet (a protocol buffer, 
+   defined in descriptor.proto))
+   ```
+   protoc --proto_path=src/main/resources --descriptor_set_out=src/main/resources/message_sample.desc --include_imports src/main/resources/playground/v1/message_sample.proto
+   ```
+   
+3) Run DescriptorFileParser.java
+ 
+### Positives
+1) Parser automatically loads imported schemas
+
+### Negatives
+1) Extra pre-processing step: compile proto files into a descriptor file
+2) Uses Java bindings for Options file
+2) Unable to parse comments
