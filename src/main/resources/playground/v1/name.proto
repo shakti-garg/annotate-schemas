@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package playground.v1;
 
-import "playground/v1/business_term_descriptor.proto";
+import "playground/v1/business_term_options.proto";
 
 message Name {
   option (playground.v1.biz_term) = {def: "Name definition" source_name: "FIBO" source_uri: "https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/Name"};

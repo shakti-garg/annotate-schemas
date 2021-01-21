@@ -1,35 +1,16 @@
 package org.github.shakti;
 
-import com.google.protobuf.*;
-import playground.v1.BusinessTermOptionsOuterClass;
+import com.google.protobuf.Descriptors;
 import playground.v1.MessageSampleOuterClass;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
-public class DescriptorFileParser {
+public class GeneratedJavaParser {
 
     public static void main(String[] args) throws IOException, Descriptors.DescriptorValidationException {
-        /*FileInputStream optionFin = new FileInputStream("src/main/resources/business_term_options.desc");
-        DescriptorProtos.FileDescriptorSet optionSet = DescriptorProtos.FileDescriptorSet.parseFrom(optionFin);
-        */
 
-        ExtensionRegistry extensionRegistry = ExtensionRegistry.newInstance();
-        extensionRegistry.add(BusinessTermOptionsOuterClass.bizTerm);
-
-        FileInputStream fin = new FileInputStream("src/main/resources/message_sample.desc");
-        DescriptorProtos.FileDescriptorSet set = DescriptorProtos.FileDescriptorSet.parseFrom(fin, extensionRegistry);
-
-        List<Descriptors.FileDescriptor> dependencyFileDescriptorList = new ArrayList<>();
-        for(int i=2; i<set.getFileCount()-1; i++) {
-            dependencyFileDescriptorList.add(Descriptors.FileDescriptor.buildFrom(set.getFile(i), dependencyFileDescriptorList.toArray(new Descriptors.FileDescriptor[0])));
-        }
-
-        //retrieve last proto message (all previous to it will be deps)
-        Descriptors.FileDescriptor fd = Descriptors.FileDescriptor.buildFrom(set.getFile(set.getFileCount()-1), dependencyFileDescriptorList.toArray(new Descriptors.FileDescriptor[0]));
+        Descriptors.FileDescriptor fd = MessageSampleOuterClass.getDescriptor();
 
         System.out.println("=====Top-level Schema======");
         System.out.println(fd.toProto());
