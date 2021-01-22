@@ -7,18 +7,32 @@ import playground.v1.MessageSampleOuterClass;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 public class DescriptorFileParser {
 
     public static void main(String[] args) throws IOException, Descriptors.DescriptorValidationException {
-        /*FileInputStream optionFin = new FileInputStream("src/main/resources/business_term_options.desc");
+        FileInputStream optionFin = new FileInputStream("src/main/resources/business_term_options.desc");
         DescriptorProtos.FileDescriptorSet optionSet = DescriptorProtos.FileDescriptorSet.parseFrom(optionFin);
-        */
+
+        Descriptors.FileDescriptor googleOptionsFd = Descriptors.FileDescriptor.buildFrom(optionSet.getFile(0), new Descriptors.FileDescriptor[0]);
+        Descriptors.FileDescriptor optionFd = Descriptors.FileDescriptor.buildFrom(optionSet.getFile(1),
+                Collections.singletonList(googleOptionsFd).toArray(new Descriptors.FileDescriptor[0]));
 
         ExtensionRegistry extensionRegistry = ExtensionRegistry.newInstance();
-        extensionRegistry.add(BusinessTermOptionsOuterClass.bizTerm);
+        for(Descriptors.FieldDescriptor extension : optionFd.getExtensions()) {
+            if(extension.getJavaType() == Descriptors.FieldDescriptor.JavaType.MESSAGE){
+                DynamicMessage dynamicMessage = DynamicMessage.getDefaultInstance(optionFd.getMessageTypes().get(0));
+                //DynamicMessage dynamicMessage = DynamicMessage.newBuilder(optionFd.getMessageTypes().get(0)).build();
+                extensionRegistry.add(extension, dynamicMessage);
+            }
+            else {
+                extensionRegistry.add(extension);
+            }
+        }
+        //extensionRegistry.add(BusinessTermOptionsOuterClass.bizTerm);
 
         FileInputStream fin = new FileInputStream("src/main/resources/message_sample.desc");
         DescriptorProtos.FileDescriptorSet set = DescriptorProtos.FileDescriptorSet.parseFrom(fin, extensionRegistry);

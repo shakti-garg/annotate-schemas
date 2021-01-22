@@ -40,3 +40,9 @@ Use protobuf API's FileDescriptorSet to parse protobuf file and its dependencies
 1) Extra pre-processing step: compile proto files into a descriptor file
 2) Uses Java bindings for Options file
 2) Unable to parse comments
+
+
+#Open Question
+1) Validate WireParser
+2) Remove java binding dependency for generating ExtensionRegistry in DescriptorFileParser
+3) use buf to generate descriptor files instead of protoc
