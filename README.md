@@ -31,10 +31,19 @@ Use protobuf API's FileDescriptorSet to parse protobuf file and its dependencies
 2) Compile protobuf files to generate a compiled binary descriptor file(contains a FileDescriptorSet (a protocol buffer, 
    defined in descriptor.proto))
    ```
-   protoc --proto_path=src/main/resources/proto --descriptor_set_out=src/main/resources/protoc-bin/business_term_options.desc --include_imports --experimental_allow_proto3_optional src/main/resources/proto/playground/options/v1/business_term_options.proto
+   protoc --proto_path=src/main/resources/proto --descriptor_set_out=src/main/resources/protoc-bin/business_term_options.desc --include_imports src/main/resources/proto/playground/options/v1/business_term_options.proto
    
    protoc --proto_path=src/main/resources/proto --descriptor_set_out=src/main/resources/protoc-bin/message_sample.desc --include_imports src/main/resources/proto/playground/v1/message_sample.proto
    ```
+   
+   or
+   
+   ```
+   buf build --config '{"build":{"roots":["src/main/resources/proto"]}}' --exclude-source-info -o src/main/resources/buf-bin/business_term_options.desc --path src/main/resources/proto/playground/options/v1/business_term_options.proto
+   
+   buf build --config '{"build":{"roots":["src/main/resources/proto"]}}' --exclude-source-info -o src/main/resources/buf-bin/message_sample.desc --path src/main/resources/proto/playground/v1/message_sample.proto
+   ```
+   
    
 3) Run DescriptorFileParser.java
  
