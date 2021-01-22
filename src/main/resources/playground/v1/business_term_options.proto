@@ -13,4 +13,5 @@ message BusinessTermOptions {
 
 extend google.protobuf.MessageOptions {
   optional BusinessTermOptions biz_term = 51234;
+  optional string doc = 51235;
 }
