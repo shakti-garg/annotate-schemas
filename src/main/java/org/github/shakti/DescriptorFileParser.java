@@ -12,7 +12,7 @@ import java.util.Map;
 public class DescriptorFileParser {
 
     public static void main(String[] args) throws IOException, Descriptors.DescriptorValidationException {
-        FileInputStream optionFin = new FileInputStream("src/main/resources/protoc-bin/business_term_options.desc");
+        FileInputStream optionFin = new FileInputStream("src/main/resources/buf-bin/business_term_options.desc");
         DescriptorProtos.FileDescriptorSet optionSet = DescriptorProtos.FileDescriptorSet.parseFrom(optionFin);
 
         Descriptors.FileDescriptor googleOptionsFd = Descriptors.FileDescriptor.buildFrom(optionSet.getFile(0), new Descriptors.FileDescriptor[0]);
@@ -32,7 +32,7 @@ public class DescriptorFileParser {
         }
         //extensionRegistry.add(BusinessTermOptionsOuterClass.bizTerm);
 
-        FileInputStream fin = new FileInputStream("src/main/resources/protoc-bin/message_sample.desc");
+        FileInputStream fin = new FileInputStream("src/main/resources/buf-bin/message_sample.desc");
         DescriptorProtos.FileDescriptorSet set = DescriptorProtos.FileDescriptorSet.parseFrom(fin, extensionRegistry);
 
         List<Descriptors.FileDescriptor> dependencyFileDescriptorList = new ArrayList<>();

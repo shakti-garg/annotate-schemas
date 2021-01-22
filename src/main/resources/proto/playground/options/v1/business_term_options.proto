@@ -1,17 +1,17 @@
-syntax = "proto3";
+syntax = "proto2";
 
 package playground.v1;
 
 import "google/protobuf/descriptor.proto";
 
 message BusinessTermOptions {
-  string def = 2;
-  string source_name = 3;
-  string source_uri = 4;
+  optional string def = 2;
+  optional string source_name = 3;
+  optional string source_uri = 4;
 }
 
 
 extend google.protobuf.MessageOptions {
-  BusinessTermOptions biz_term = 51234;
-  string doc = 51235;
+  optional BusinessTermOptions biz_term = 51234;
+  optional string doc = 51235;
 }
