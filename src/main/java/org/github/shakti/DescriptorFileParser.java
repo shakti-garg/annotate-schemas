@@ -1,8 +1,6 @@
 package org.github.shakti;
 
 import com.google.protobuf.*;
-import playground.v1.BusinessTermOptionsOuterClass;
-import playground.v1.MessageSampleOuterClass;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -14,7 +12,7 @@ import java.util.Map;
 public class DescriptorFileParser {
 
     public static void main(String[] args) throws IOException, Descriptors.DescriptorValidationException {
-        FileInputStream optionFin = new FileInputStream("src/main/resources/business_term_options.desc");
+        FileInputStream optionFin = new FileInputStream("src/main/resources/protoc-bin/business_term_options.desc");
         DescriptorProtos.FileDescriptorSet optionSet = DescriptorProtos.FileDescriptorSet.parseFrom(optionFin);
 
         Descriptors.FileDescriptor googleOptionsFd = Descriptors.FileDescriptor.buildFrom(optionSet.getFile(0), new Descriptors.FileDescriptor[0]);
@@ -34,7 +32,7 @@ public class DescriptorFileParser {
         }
         //extensionRegistry.add(BusinessTermOptionsOuterClass.bizTerm);
 
-        FileInputStream fin = new FileInputStream("src/main/resources/message_sample.desc");
+        FileInputStream fin = new FileInputStream("src/main/resources/protoc-bin/message_sample.desc");
         DescriptorProtos.FileDescriptorSet set = DescriptorProtos.FileDescriptorSet.parseFrom(fin, extensionRegistry);
 
         List<Descriptors.FileDescriptor> dependencyFileDescriptorList = new ArrayList<>();

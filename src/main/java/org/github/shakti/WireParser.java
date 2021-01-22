@@ -11,7 +11,7 @@ public class WireParser {
   private static final String BASE_LOCATION = "./";
 
   public static void main(String[] args) throws IOException {
-    final String path = "src/main/resources/playground/v1/message_sample.proto";
+    final String path = "src/main/resources/proto/playground/v1/message_sample.proto";
     final File schemaFile = new File(path);
 
     final String schemaString = new String(Files.readAllBytes(schemaFile.toPath()));

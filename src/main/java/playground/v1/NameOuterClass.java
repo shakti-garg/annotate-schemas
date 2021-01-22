@@ -747,12 +747,13 @@ public final class NameOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\030playground/v1/name.proto\022\rplayground.v" +
-      "1\032)playground/v1/business_term_options.p" +
-      "roto\"\230\001\n\004Name\022\022\n\nfirst_name\030\001 \001(\t\022\021\n\tlas" +
-      "t_name\030\002 \001(\t:i\222\202\031e\022\017Name definition\032\004FIB" +
-      "O\"Lhttps://spec.edmcouncil.org/fibo/onto" +
-      "logy/FND/Accounting/CurrencyAmount/Nameb" +
-      "\006proto3"
+      "1\0321playground/options/v1/business_term_o" +
+      "ptions.proto\"\266\001\n\004Name\022\022\n\nfirst_name\030\001 \001(" +
+      "\t\022\021\n\tlast_name\030\002 \001(\t:\206\001\222\202\031e\022\017Name defini" +
+      "tion\032\004FIBO\"Lhttps://spec.edmcouncil.org/" +
+      "fibo/ontology/FND/Accounting/CurrencyAmo" +
+      "unt/Name\232\202\031\031Name schema documentationb\006p" +
+      "roto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -768,6 +769,7 @@ public final class NameOuterClass {
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();
     registry.add(playground.v1.BusinessTermOptionsOuterClass.bizTerm);
+    registry.add(playground.v1.BusinessTermOptionsOuterClass.doc);
     com.google.protobuf.Descriptors.FileDescriptor
         .internalUpdateFileDescriptor(descriptor, registry);
     playground.v1.BusinessTermOptionsOuterClass.getDescriptor();
