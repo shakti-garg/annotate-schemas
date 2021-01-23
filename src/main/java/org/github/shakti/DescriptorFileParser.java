@@ -1,6 +1,7 @@
 package org.github.shakti;
 
 import com.google.protobuf.*;
+import playground.v1.BusinessTermOptionsOuterClass;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -12,15 +13,18 @@ import java.util.Map;
 public class DescriptorFileParser {
 
     public static void main(String[] args) throws IOException, Descriptors.DescriptorValidationException {
-        FileInputStream optionFin = new FileInputStream("src/main/resources/buf-bin/business_term_options.desc");
+        ExtensionRegistry extensionRegistry = ExtensionRegistry.newInstance();
+        //Dynamic population of ExtensionRegistry not working due to issue(https://github.com/protocolbuffers/protobuf/issues/5587)
+
+        /*FileInputStream optionFin = new FileInputStream("src/main/resources/buf-bin/business_term_options.desc");
         DescriptorProtos.FileDescriptorSet optionSet = DescriptorProtos.FileDescriptorSet.parseFrom(optionFin);
 
         Descriptors.FileDescriptor googleOptionsFd = Descriptors.FileDescriptor.buildFrom(optionSet.getFile(0), new Descriptors.FileDescriptor[0]);
         Descriptors.FileDescriptor optionFd = Descriptors.FileDescriptor.buildFrom(optionSet.getFile(1),
                 Collections.singletonList(googleOptionsFd).toArray(new Descriptors.FileDescriptor[0]));
 
-        ExtensionRegistry extensionRegistry = ExtensionRegistry.newInstance();
         for(Descriptors.FieldDescriptor extension : optionFd.getExtensions()) {
+
             if(extension.getJavaType() == Descriptors.FieldDescriptor.JavaType.MESSAGE){
                 DynamicMessage dynamicMessage = DynamicMessage.getDefaultInstance(optionFd.getMessageTypes().get(0));
                 //DynamicMessage dynamicMessage = DynamicMessage.newBuilder(optionFd.getMessageTypes().get(0)).build();
@@ -29,8 +33,10 @@ public class DescriptorFileParser {
             else {
                 extensionRegistry.add(extension);
             }
-        }
-        //extensionRegistry.add(BusinessTermOptionsOuterClass.bizTerm);
+        }*/
+
+        extensionRegistry.add(BusinessTermOptionsOuterClass.bizTerm);
+        extensionRegistry.add(BusinessTermOptionsOuterClass.doc);
 
         FileInputStream fin = new FileInputStream("src/main/resources/buf-bin/message_sample.desc");
         DescriptorProtos.FileDescriptorSet set = DescriptorProtos.FileDescriptorSet.parseFrom(fin, extensionRegistry);
@@ -65,7 +71,15 @@ public class DescriptorFileParser {
         for (Map.Entry<Descriptors.FieldDescriptor, Object> msgOption : msgType.getOptions().getAllFields().entrySet()) {
             System.out.println("=====Message Options======");
             System.out.println("name: " + msgOption.getKey().getName());
-            System.out.println("value: " + msgOption.getValue());
+
+            if(msgOption.getValue() instanceof BusinessTermOptionsOuterClass.BusinessTermOptions){
+                System.out.println("value def: " + ((BusinessTermOptionsOuterClass.BusinessTermOptions) msgOption.getValue()).getDef());
+                System.out.println("value source_name: " + ((BusinessTermOptionsOuterClass.BusinessTermOptions) msgOption.getValue()).getSourceName());
+                System.out.println("value source_uri: " + ((BusinessTermOptionsOuterClass.BusinessTermOptions) msgOption.getValue()).getSourceUri());
+            }
+            else {
+                System.out.println("value: " + msgOption.getValue());
+            }
         }
 
         System.out.println("=====Field Schema======");
