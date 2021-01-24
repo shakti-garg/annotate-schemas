@@ -56,10 +56,15 @@ Use protobuf API's FileDescriptorSet to parse protobuf file and its dependencies
 1) Extra pre-processing step: compile proto files into a descriptor file
 2) compile-time dependency of Java bindings for custom options (to populate extensionRegistry) 
    - Not able to populate extensionRegistry from fieldDescriptors due to issue(https://github.com/protocolbuffers/protobuf/issues/5587)
+   - Another reason being that custom-options/extensions uses syntax=PROTO2 (https://developers.google.com/protocol-buffers/docs/reference/java-generated#extension)
 2) Unable to parse comments
 
 
 ## Other Approaches:
-1) Dymamically load java bindings [Not considered as it uses reflection]
-2) Read from Kafka Schema Registry [Not considered as it creates heavy coupling with schema-registry]
+1) Dymamically load java bindings 
+   - [Not considered] as it uses reflection
+2) Parse using Confluent-Kafka Schema Registry API (schema can be read from file or schema registry)
+   - [Not considered] as 
+     1) doesn't support options
+     2) it creates heavy coupling with confluent schema-registry
 
