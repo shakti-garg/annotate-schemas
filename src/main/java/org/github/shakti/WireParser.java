@@ -6,18 +6,35 @@ import com.squareup.wire.schema.internal.parser.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 
 public class WireParser {
   private static final String BASE_LOCATION = "./";
 
   public static void main(String[] args) throws IOException {
-    final String path = "src/main/resources/proto/playground/v1/message_sample.proto";
-    final File schemaFile = new File(path);
-
+    File schemaFile = new File("src/main/resources/proto/playground/v1/message_sample.proto");
     final String schemaString = new String(Files.readAllBytes(schemaFile.toPath()));
-    final ProtoFileElement protoFileElement = ProtoParser.Companion
+
+    Map<String, String> resolvedReferences = new HashMap<>();
+    resolvedReferences.put("playground/v1/name.proto",
+            new String(Files.readAllBytes(Paths.get("src/main/resources/proto/playground/v1/name.proto"))));
+
+    ProtoFileElement protoFileElement = ProtoParser.Companion
         .parse(Location.get(BASE_LOCATION, "src/main/resources"), schemaString);
 
+    printMetadata(protoFileElement);
+
+    for(String nestedSchema : resolvedReferences.values()){
+      ProtoFileElement nestedProtoFileElement = ProtoParser.Companion
+              .parse(Location.get(BASE_LOCATION, "src/main/resources"), nestedSchema);
+
+      printMetadata(nestedProtoFileElement);
+    }
+  }
+
+  private static void printMetadata(ProtoFileElement protoFileElement) {
     System.out.println("=====Top-level Schema======");
     System.out.println(protoFileElement.toSchema());
 
